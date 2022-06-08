@@ -6,7 +6,7 @@ const observe = require("inquirer/lib/utils/events");
 const Table = require("cli-table");
 const { map, takeUntil } = require("rxjs/operators");
 
-class TablePrompt extends Base {
+class SelecTableTablePrompt extends Base {
   /**
    * Initialise the prompt
    *
@@ -42,7 +42,6 @@ class TablePrompt extends Base {
     validation.success.forEach(this.onEnd.bind(this));
     validation.error.forEach(this.onError.bind(this));
 
-
     events.normalizedUpKey
       .pipe(takeUntil(validation.success))
       .forEach(this.onUpKey.bind(this));
@@ -61,8 +60,7 @@ class TablePrompt extends Base {
   }
 
   getCurrentValue() {
-
-    return {...this.rowValues[this.pointer]};
+    return { ...this.rowValues[this.pointer] };
   }
 
   onDownKey() {
@@ -113,7 +111,7 @@ class TablePrompt extends Base {
         "\n (Press " +
         chalk.cyan.bold("<space>") +
         " to select, " +
-        chalk.cyan.bold("<Up and Down>") 
+        chalk.cyan.bold("<Up and Down>");
     }
 
     const [firstIndex, lastIndex] = this.paginate();
@@ -121,25 +119,28 @@ class TablePrompt extends Base {
       head: [
         chalk.reset.dim(
           `${firstIndex + 1}-${lastIndex + 1} of ${this.rows.realLength}`
-        )
-      ].concat(this.columns.pluck("name").map(name => chalk.reset.bold(name)))
+        ),
+      ].concat(
+        this.columns.pluck("name").map((name) => chalk.reset.bold(name))
+      ),
     });
-
-    console.log(table)
     this.rows.forEach((row, rowIndex) => {
       if (rowIndex < firstIndex || rowIndex > lastIndex) return;
       const chalkModifier =
-      this.status !== "answered" && this.pointer === rowIndex
-        ? chalk.reset.bold.cyan
-        : chalk.reset;
-        //  delete the inquirer name, value, short and disable before pushing 
-        delete row["name"];
-        delete row["short"];
-        delete row["value"];
-        delete row["disabled"];
-    
-      table.push({ [chalkModifier(rowIndex + 1)]:Object.values(row).map((value)=>value === undefined ? "":chalkModifier(value))})
+        this.status !== "answered" && this.pointer === rowIndex
+          ? chalk.reset.bold.cyan
+          : chalk.reset;
+      //  delete the inquirer name, value, short and disable before pushing
+      delete row["name"];
+      delete row["short"];
+      delete row["value"];
+      delete row["disabled"];
 
+      table.push({
+        [chalkModifier(rowIndex + 1)]: Object.values(row).map((value) =>
+          value === undefined ? "" : chalkModifier(value)
+        ),
+      });
     });
 
     message += "\n\n" + table.toString();
@@ -152,4 +153,4 @@ class TablePrompt extends Base {
   }
 }
 
-module.exports = TablePrompt;
+module.exports = SelecTableTablePrompt;
