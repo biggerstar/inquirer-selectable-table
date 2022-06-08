@@ -1,0 +1,49 @@
+{
+  "name": "inquirer-selectable-table",
+  "version": "0.0.1",
+  "description": "A Selectable table-like prompt for Inquirer",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "cli-cursor": "^4.0.0",
+    "cli-table": "^0.3.11",
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.0",
+    "prettier": "^2.6.2"
+  },
+  "scripts": {
+    "test": "npm run format",
+    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazehs/inquirer-selectable-table.git"
+  },
+  "keywords": [
+    "inquirer",
+    "cli",
+    "prompt",
+    "table",
+    "selectable"
+  ],
+  "author": "Nazeh Abel <mail@nazehabel@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazehs/inquirer-selectable-table/issues"
+  },
+  "homepage": "https://github.com/nazehs/inquirer-selectable-table#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md,html}": [
+      "npm run format",
+      "git add"
+    ]
+  }
+}
