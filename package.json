@@ -1,23 +1,37 @@
 {
   "name": "@biggerstar/inquirer-selectable-table",
-  "version": "1.0.01",
+  "version": "1.0.5",
   "description": "修改自 inquirer-selectable-table， 无内边框版本",
   "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "bun test/test.ts",
+    "build": "bun build src/index.ts --outfile=dist/index.js --target node &&  bun run scripts/build.js",
+    "release:npm": "npm run build && npm publish",
+    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+  },
+  "exports": {
+    "default": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
   "dependencies": {
+    "@types/bun": "^1.1.6",
     "chalk": "^5.0.1",
     "cli-cursor": "^4.0.0",
     "cli-table": "^0.3.11",
-    "inquirer": "^8.2.4"
+    "inquirer": "^8.2.4",
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@types/cli-table": "^0.3.4",
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^20.14.2",
+    "bun": "^1.1.24",
+    "bun-plugin-dts": "^0.2.3",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.0",
-    "prettier": "^2.6.2"
-  },
-  "scripts": {
-    "test": "npm run format",
-    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+    "prettier": "^2.6.2",
+    "vite": "^5.4.1"
   },
   "keywords": [
     "inquirer",

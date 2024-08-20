@@ -31,43 +31,42 @@ inquirer
       columns: [
         {
           name: "firstName",
-          value: "firstName"
+          value: "firstName",
         },
         {
           name: "lastName",
-          value: "lastName"
+          value: "lastName",
         },
         {
           name: "location",
-          value: "location"
-        }
+          value: "location",
+        },
       ],
       rows: [
-           {
+        {
           firstName: "Abel",
-         lastName:"Nazeh",
-         location:"Nigeria"
+          lastName: "Nazeh",
+          location: "Nigeria",
         },
         {
           firstName: "Daniel",
-         lastName:"Ruiz",
-         location:"Spain"
+          lastName: "Ruiz",
+          location: "Spain",
         },
-            {
+        {
           firstName: "John",
-         lastName:"Doe",
-         location:"Leaf Village"
+          lastName: "Doe",
+          location: "Leaf Village",
         },
-               {
+        {
           firstName: "Kakashi",
-         lastName:"Hatake",
-         location:"Leaf Village"
+          lastName: "Hatake",
+          location: "Leaf Village",
         },
-      ]
-    }
+      ],
+    },
   ])
-  .then(answers => {
-  
+  .then((answers) => {
     console.log(answers);
   });
 ```
