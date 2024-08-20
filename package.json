@@ -1,6 +1,6 @@
 {
   "name": "@biggerstar/inquirer-selectable-table",
-  "version": "1.0.6",
+  "version": "1.0.10",
   "description": "修改自 inquirer-selectable-table， 无内边框版本",
   "main": "index.js",
   "type": "module",
@@ -11,15 +11,16 @@
     "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
   },
   "exports": {
-    "default": "./dist/index.js",
-    "import": "./dist/index.js",
-    "types": "./dist/index.d.ts"
+    ".": {
+      "default": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@types/bun": "^1.1.6",
     "chalk": "^5.0.1",
     "cli-cursor": "^4.0.0",
     "cli-table3": "^0.6.5",
@@ -27,7 +28,7 @@
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "@types/cli-table": "^0.3.4",
+    "@types/bun": "^1.1.6",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.14.2",
     "bun": "^1.1.24",

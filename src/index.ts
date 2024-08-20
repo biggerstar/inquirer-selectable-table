@@ -1,5 +1,5 @@
 import {map, takeUntil} from "rxjs/operators";
-import Table from "cli-table3";
+import Table, {type TableInstanceOptions} from "cli-table3";
 import observe from "inquirer/lib/utils/events";
 import Choices from "inquirer/lib/objects/choices";
 import Base from "inquirer/lib/prompts/base";
@@ -12,6 +12,7 @@ export type TQuestionOptions = {
   columns: Array<Record<string, string>>,
   rows: Array<Record<string, string>>,
   pageSize: number
+  tableOptions: TableInstanceOptions
 }
 
 export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
@@ -23,7 +24,7 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
   public pageSize: number
   public rowValues: any
   public done: Function
-
+  public tableOptions: TableInstanceOptions
   constructor(
     questions: TQuestionOptions,
     rl: ReadLineInterface,
@@ -34,6 +35,7 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
     this.pointer = 0;
     this.horizontalPointer = 0;
     this.rows = new Choices(this.opt.rows, []);
+    this.tableOptions = questions.tableOptions || {} as any
     this.pageSize = this.opt.pageSize || 5;
     this.rowValues = this.rows
       // @ts-ignore
@@ -121,6 +123,8 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
 
     const [firstIndex, lastIndex] = this.paginate();
     const table = new Table({
+      wordWrap: true,
+      wrapOnWordBoundary: true,
       // │
       chars: {
         "middle": "",
@@ -151,6 +155,7 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
         "padding-left": 1,
         "padding-right": 1,
       },
+      ...this.tableOptions
     });
     this.rows.forEach((row, rowIndex) => {
       if (rowIndex < firstIndex || rowIndex > lastIndex) return;
@@ -158,7 +163,6 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
         this.status !== "answered" && this.pointer === rowIndex
           ? chalk.reset.bold.cyan
           : chalk.reset;
-      //  delete the inquirer name, value, short and disable before pushing
 
       delete row["name"];
       delete row["short"];
