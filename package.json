@@ -1,8 +1,7 @@
 {
   "name": "@biggerstar/inquirer-selectable-table",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "修改自 inquirer-selectable-table， 无内边框版本",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "bun test/test.ts",
@@ -10,6 +9,10 @@
     "release:npm": "npm run build && npm publish",
     "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
       "default": "./dist/index.js",

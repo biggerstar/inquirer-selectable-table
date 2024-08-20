@@ -12,6 +12,7 @@ export type TQuestionOptions = {
   columns: Array<Record<string, string>>,
   rows: Array<Record<string, string>>,
   pageSize: number
+  showIndex: boolean
   tableOptions: TableInstanceOptions
 }
 
@@ -25,6 +26,8 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
   public rowValues: any
   public done: Function
   public tableOptions: TableInstanceOptions
+  public showIndex: boolean
+
   constructor(
     questions: TQuestionOptions,
     rl: ReadLineInterface,
@@ -36,6 +39,7 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
     this.horizontalPointer = 0;
     this.rows = new Choices(this.opt.rows, []);
     this.tableOptions = questions.tableOptions || {} as any
+    this.showIndex = !!this.opt.showIndex  
     this.pageSize = this.opt.pageSize || 5;
     this.rowValues = this.rows
       // @ts-ignore
@@ -170,7 +174,7 @@ export class SelectTableTablePrompt extends Base<Question & TQuestionOptions> {
       delete row["disabled"];
 
       table.push({
-        [chalk.blue(rowIndex + 1)]: Object.values(row).map((value) => {
+        [this.showIndex ? chalk.blue(rowIndex + 1) : '']: Object.values(row).map((value) => {
           return value === undefined ? "" : chalkModifier(value)
         }),
       });
