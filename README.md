@@ -9,7 +9,7 @@
 ## Installation
 
 ```shell
-npm install --save inquirer-selectable-table
+npm install --save @biggerstar/inquirer-selectable-table
 
 ```
 

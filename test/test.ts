@@ -29,8 +29,8 @@ const prompts = {
           rows: [
             {
               firstName: "Abel11111111",
-              lastName: "Nazeh000000000",
-              location: "Niger9999"
+              lastName: "Naz 跳一跳eh000000000",
+              location: "Nige跳一跳r9999"
             },
             {
               firstName: "Daniel",
